@@ -39,11 +39,19 @@ export default function KawaiiValentine() {
     ];
 
     if (count <= cuteWarnings.length) return cuteWarnings[count - 1];
-    if (count <= 12) return `This is NO #${count}… I remember each one 💀`;
-    if (count <= 20) return `I feel like a toota toota ek parinda 🕊️💔 NO #${count}`;
+    if (count <= 12) return `This is NO #${count}, I remember each one 💀`;
+    if (count <= 20) return `Big Boss mujhe hurt ho raha hai 😣💔 ${count} baar`;
 
-    const emotions = ["desperate", "dramatic", "giggly", "embarrassed", "melting", "flustered"];
-    return `NO #${count}… my rooh ka parinda is fadfadao-ing and feeling very ${emotions[count % emotions.length]} 😿`;
+    const emotions = [
+  "dramatically lying on the floor",
+  "staring at the ceiling questioning life",
+  "writing sad poetry at 3AM",
+  "playing sad songs on loop",
+  "re-evaluating my entire personality"
+];
+
+return `I have been emotionally stabbed ${count} times and I am currently ${emotions[Math.floor(Math.random() * emotions.length)]} 🎭💔`;
+
   };
 
   const handleAnswer = () => {
@@ -174,7 +182,7 @@ export default function KawaiiValentine() {
                 animate={{ scale: [1, 1.03, 1] }}
                 transition={{ repeat: Infinity, duration: 2 }}
               />
-              <p className="text-xl font-bold text-pink-600">mujhe toh pata tha 💖🥰💌👩‍❤️‍💋‍👨</p>
+              <p className="text-xl font-bold text-pink-600">mujhe toh pata tha 🥰💌👩‍❤️‍💋‍👨</p>
             </motion.div>
           )}
 
