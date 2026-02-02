@@ -174,7 +174,7 @@ export default function KawaiiValentine() {
                 animate={{ scale: [1, 1.03, 1] }}
                 transition={{ repeat: Infinity, duration: 2 }}
               />
-              <p className="text-xl font-bold text-pink-600">I love you my babbyyyyyyy 💖🥰💌👩‍❤️‍💋‍👨</p>
+              <p className="text-xl font-bold text-pink-600">mujhe toh pata tha 💖🥰💌👩‍❤️‍💋‍👨</p>
             </motion.div>
           )}
 
