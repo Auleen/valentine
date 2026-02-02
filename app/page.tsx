@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Confetti from "react-confetti";
 
-const QUESTIONS = [ { question: "What was the name of the place we went on our first date? 💭", answer: "record room" }, { question: "Name your fav triangle 😉", answer: "right angle triangle" }, { question:"What is the best date food? 🥘", answer:"pav bhaji"}, { question:"What do you call a gift for Ritoja? 🎁", answer:"ritofa"}, { question: "Who is the world's funniest bf? 🥰", answer: "auleen" }, ];
+const QUESTIONS = [{ question: "What was the name of the place we went on our first date? 💭", answer: "record room" }, { question: "Name your fav triangle 😉", answer: "right angle triangle" }, { question: "What is the best date food? 🥘", answer: "pav bhaji" }, { question: "What do you call a gift for Ritoja? 🎁", answer: "ritofa" }, { question: "Who is the world's funniest bf? 🥰", answer: "auleen" },];
 
 const baseImg = "/pixel-heart-1.png";
 const sadImages = [
@@ -26,7 +26,7 @@ export default function KawaiiValentine() {
   const [heartIndex, setHeartIndex] = useState(0);
   const [cameFromQuiz, setCameFromQuiz] = useState(false);
 
-  const getNoMessage = (count:number) => {
+  const getNoMessage = (count: number) => {
     const cuteWarnings = [
       "Are you suuure? 🥺",
       "Really really sure? 😿",
@@ -69,10 +69,10 @@ export default function KawaiiValentine() {
           {stage === "intro" && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
               <h1 className="text-xl font-bold text-pink-700">
-                Since you like me asking you questions… 💭
+                Hi Rio 🥰 <br></br>Since you like me asking you questions ...
               </h1>
               <p className="text-sm text-gray-700">
-                I made a tiny quiz just for you. Answer honestly… okay? 💖
+                I made a tiny quiz just for you. Happy Quizzing? 😉💖
               </p>
               <Button
                 className="bg-pink-500 hover:bg-pink-600 rounded-none border-2 border-black shadow-[3px_3px_0_#000]"
@@ -109,7 +109,7 @@ export default function KawaiiValentine() {
             <>
               {cameFromQuiz && (
                 <p className="text-xs text-pink-700 font-semibold">
-                 OMG you got all of them right 🥹 🎉 <br></br> You must be really smart xD. <br></br>One final question 🙋
+                  OMG you got all of them right 🥹 🎉 <br></br> You must be really smart xD. <br></br>One final question 🙋
                 </p>
               )}
 
