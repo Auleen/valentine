@@ -52,7 +52,7 @@ export default function KawaiiValentine() {
       "Let’s pretend this didn’t happen and click YES 💖",
     ];
 
-    return `NO #${count} ?!?! . ${gaslightLines[count % gaslightLines.length]}`;
+    return `NO #${count}?!?! ${gaslightLines[count % gaslightLines.length]}`;
 
   };
 
@@ -165,7 +165,7 @@ export default function KawaiiValentine() {
               </div>
 
               {noCount > 0 && (
-                <p className="text-xs text-gray-700 pt-2">{getNoMessage(noCount)}</p>
+                <p className="text-xs text-gray-700 pt-2 font-bold">{getNoMessage(noCount)}</p>
               )}
             </>
           )}
