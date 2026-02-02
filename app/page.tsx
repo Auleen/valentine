@@ -42,15 +42,17 @@ export default function KawaiiValentine() {
     if (count <= 12) return `This is NO #${count}, I remember each one 💀`;
     if (count <= 20) return `Big Boss mujhe hurt ho raha hai 😣💔 ${count} baar`;
 
-    const emotions = [
-  "dramatically lying on the floor",
-  "staring at the ceiling questioning life",
-  "writing sad poetry at 3AM",
-  "playing sad songs on loop",
-  "re-evaluating my entire personality"
-];
+    const gaslightLines = [
+      "Hmm… that button definitely said YES a second ago 🤨",
+      "Interesting… I think your finger slipped 😌",
+      "NO? That’s weird. My screen says YES 💕",
+      "Are you sure you read the question correctly? 😇",
+      "That doesn’t feel like a NO. Try again 🥰",
+      "I think the universe wants you to press YES 🌸",
+      "Let’s pretend this didn’t happen and click YES 💖",
+    ];
 
-return `I have been emotionally stabbed ${count} times and I am currently ${emotions[Math.floor(Math.random() * emotions.length)]} 🎭💔`;
+    return `NO #${count} ?!?! . ${gaslightLines[count % gaslightLines.length]}`;
 
   };
 
