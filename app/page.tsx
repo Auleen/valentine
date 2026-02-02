@@ -1,65 +1,185 @@
-import Image from "next/image";
+"use client"; // This is a client component 👈🏽
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Confetti from "react-confetti";
 
-export default function Home() {
+const QUESTIONS = [ { question: "What was the name of the place we went on our first date? 💭", answer: "record room" }, { question: "Name your fav triangle 😉", answer: "right angle triangle" }, { question:"What is the best date food? 🥘", answer:"pav bhaji"}, { question:"What do you call a gift for Ritoja? 🎁", answer:"ritofa"}, { question: "Who is the world's funniest bf? 🥰", answer: "auleen" }, ];
+
+const baseImg = "/pixel-heart-1.png";
+const sadImages = [
+  "/pixel-heart-sad-3.png",
+  "/pixel-heart-sad-1.png",
+  "/pixel-heart-sad-2.png",
+  "/pixel-heart-sad-4.png",
+];
+
+export default function KawaiiValentine() {
+  const [stage, setStage] = useState("intro"); // intro | quiz | valentine
+  const [currentQ, setCurrentQ] = useState(0);
+  const [input, setInput] = useState("");
+  const [error, setError] = useState(false);
+  const [saidYes, setSaidYes] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [noCount, setNoCount] = useState(0);
+  const [heartIndex, setHeartIndex] = useState(0);
+  const [cameFromQuiz, setCameFromQuiz] = useState(false);
+
+  const getNoMessage = (count:number) => {
+    const cuteWarnings = [
+      "Are you suuure? 🥺",
+      "Really really sure? 😿",
+      "My heart is wobbling… 💔",
+      "Wait… think again! 😭",
+      "The heart is shaking! 💖",
+      "I feel personally attacked 😵‍💫",
+      "Are you trying to break me? 😿",
+      "NO is a strong word… 😢",
+    ];
+
+    if (count <= cuteWarnings.length) return cuteWarnings[count - 1];
+    if (count <= 12) return `This is NO #${count}… I remember each one 💀`;
+    if (count <= 20) return `I feel like a toota toota ek parinda 🕊️💔 NO #${count}`;
+
+    const emotions = ["desperate", "dramatic", "giggly", "embarrassed", "melting", "flustered"];
+    return `NO #${count}… my rooh ka parinda is fadfadao-ing and feeling very ${emotions[count % emotions.length]} 😿`;
+  };
+
+  const handleAnswer = () => {
+    if (input.toLowerCase().trim() === QUESTIONS[currentQ].answer.toLowerCase()) {
+      setError(false);
+      setInput("");
+      if (currentQ + 1 < QUESTIONS.length) {
+        setCurrentQ(currentQ + 1);
+      } else {
+        setCameFromQuiz(true);
+        setStage("valentine");
+      }
+    } else {
+      setError(true);
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="min-h-screen flex items-center justify-center bg-pink-300 bg-[url('/bg.png')] font-mono">
+      <Card className="w-[360px] rounded-none border-4 border-pink-500 shadow-[8px_8px_0_#ec4899] bg-pink-100">
+        <CardContent className="p-6 text-center space-y-6">
+
+          {stage === "intro" && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
+              <h1 className="text-xl font-bold text-pink-700">
+                Since you like me asking you questions… 💭
+              </h1>
+              <p className="text-sm text-gray-700">
+                I made a tiny quiz just for you. Answer honestly… okay? 💖
+              </p>
+              <Button
+                className="bg-pink-500 hover:bg-pink-600 rounded-none border-2 border-black shadow-[3px_3px_0_#000]"
+                onClick={() => setStage("quiz")}
+              >
+                I'M READY 🎀
+              </Button>
+            </motion.div>
+          )}
+
+          {stage === "quiz" && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
+              <p className="text-xs text-gray-600">Question {currentQ + 1} / {QUESTIONS.length}</p>
+              <h2 className="text-sm font-bold text-pink-700">
+                {QUESTIONS[currentQ].question}
+              </h2>
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className="w-full border-2 border-black rounded-none p-2 text-center"
+                placeholder="type here…"
+              />
+              {error && <p className="text-xs text-red-500">try again 🥺</p>}
+              <Button
+                className="bg-pink-500 hover:bg-pink-600 rounded-none border-2 border-black shadow-[3px_3px_0_#000]"
+                onClick={handleAnswer}
+              >
+                SUBMIT 💌
+              </Button>
+            </motion.div>
+          )}
+
+          {stage === "valentine" && !saidYes && (
+            <>
+              {cameFromQuiz && (
+                <p className="text-xs text-pink-700 font-semibold">
+                 OMG you got all of them right 🥹 🎉 <br></br> You must be really smart xD. <br></br>One final question 🙋
+                </p>
+              )}
+
+              <motion.img
+                key={heartIndex}
+                src={noCount ? sadImages[heartIndex] : baseImg}
+                alt="pixel heart"
+                className="mx-auto w-40 h-40 image-rendering-pixelated"
+                animate={{ scale: [1, 1.15, 1] }}
+                transition={{ repeat: Infinity, duration: 1.2 }}
+              />
+
+              <h1 className="text-xl font-bold text-pink-700">
+                WILL U BE MY<br />VALENTINE?
+              </h1>
+
+              <div className="flex justify-center gap-4 pt-2">
+                <Button
+                  className={`bg-pink-500 hover:bg-pink-600 rounded-none border-2 border-black shadow-[3px_3px_0_#000] transition-transform ${noCount > 0 ? 'scale-110' : ''}`}
+                  onClick={() => {
+                    setSaidYes(true);
+                    setShowConfetti(true);
+                  }}
+                >
+                  YES ❤
+                </Button>
+
+                <motion.div
+                  animate={{ x: noCount > 0 ? [0, -12, 12, 0] : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Button
+                    variant="outline"
+                    className={`rounded-none border-2 border-black shadow-[3px_3px_0_#000] transition-transform scale-[${Math.max(0.7, 1 - noCount * 0.08)}]`}
+                    onClick={() => {
+                      setNoCount(noCount + 1);
+                      setHeartIndex((heartIndex + 1) % sadImages.length);
+                    }}
+                  >
+                    NO 💔
+                  </Button>
+                </motion.div>
+              </div>
+
+              {noCount > 0 && (
+                <p className="text-xs text-gray-700 pt-2">{getNoMessage(noCount)}</p>
+              )}
+            </>
+          )}
+
+          {showConfetti && (
+            <Confetti recycle={false} numberOfPieces={300} />
+          )}
+
+          {saidYes && (
+            <motion.div initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="space-y-4">
+              <h1 className="text-2xl font-bold text-pink-700">YAYYYYYYY :3</h1>
+              <motion.img
+                src="/image.png"
+                alt="pixel heart"
+                className="mx-auto w-40 h-40 image-rendering-pixelated"
+                animate={{ scale: [1, 1.03, 1] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+              />
+              <p className="text-xl font-bold text-pink-600">I love you my babbyyyyyyy 💖🥰💌👩‍❤️‍💋‍👨</p>
+            </motion.div>
+          )}
+
+        </CardContent>
+      </Card>
     </div>
   );
 }
