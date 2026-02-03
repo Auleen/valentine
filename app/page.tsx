@@ -4,7 +4,9 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Confetti from "react-confetti";
+import Image from 'next/image';
 
+const MotionImage = motion(Image);
 const QUESTIONS = [{ question: "What was the name of the place we went on our first date? 💭", answer: "record room" }, { question: "Name your fav triangle 😉", answer: "right angle triangle" }, { question: "What is the best date food? 🥘", answer: "pav bhaji" }, { question: "What do you call a gift for Ritoja? 🎁", answer: "ritofa" }, { question: "Who is the world's funniest bf? 🥰", answer: "auleen" },];
 
 const baseImg = "/pixel-heart-1.png";
@@ -123,10 +125,12 @@ export default function KawaiiValentine() {
                 </p>
               )}
 
-              <motion.img
+              <MotionImage
                 key={heartIndex}
                 src={noCount ? sadImages[heartIndex] : baseImg}
                 alt="pixel heart"
+                placeholder="blur"
+                priority={true}
                 className="mx-auto w-40 h-40 image-rendering-pixelated"
                 animate={{ scale: [1, 1.15, 1] }}
                 transition={{ repeat: Infinity, duration: 1.2 }}
@@ -177,9 +181,11 @@ export default function KawaiiValentine() {
           {saidYes && (
             <motion.div initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="space-y-4">
               <h1 className="text-2xl font-bold text-pink-700">YAYYYYYYY :3</h1>
-              <motion.img
+              <MotionImage
                 src="/image.png"
                 alt="pixel heart"
+                priority={true}
+                placeholder="blur"
                 className="mx-auto w-40 h-40 image-rendering-pixelated"
                 animate={{ scale: [1, 1.03, 1] }}
                 transition={{ repeat: Infinity, duration: 2 }}
