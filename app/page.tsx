@@ -186,11 +186,11 @@ export default function KawaiiValentine() {
                 alt="pixel heart"
                 priority={true}
                 placeholder="blur"
-                className="mx-auto w-40 h-40 image-rendering-pixelated"
+                className="mx-auto w-50 h-50 image-rendering-pixelated"
                 animate={{ scale: [1, 1.03, 1] }}
                 transition={{ repeat: Infinity, duration: 2 }}
               />
-              <p className="text-xl font-bold text-pink-600">mujhe toh pata tha 🥰💌👩‍❤️‍💋‍👨</p>
+              <p className="text-xl font-bold text-pink-600">mujhe toh pata tha 🥰 💌 👩‍❤️‍💋‍👨</p>
             </motion.div>
           )}
 
