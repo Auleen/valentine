@@ -7,7 +7,43 @@ import Confetti from "react-confetti";
 import Image from 'next/image';
 
 const MotionImage = motion(Image);
-const QUESTIONS = [{ question: "What was the name of the place we went on our first date? 💭", answer: "record room" }, { question: "Name your fav triangle 😉", answer: "right angle triangle" }, { question: "What is the best date food? 🥘", answer: "pav bhaji" }, { question: "What do you call a gift for Ritoja? 🎁", answer: "ritofa" }, { question: "Who is the world's funniest bf? 🥰", answer: "auleen" },];
+const QUESTIONS = [
+  {
+    question: "What was the name of the place we went on our first date? 💭",
+    answer: "record room",
+    hint: "we had a great view 😋 ( atleast i did 😏 )"
+  },
+  {
+    question: "Name your fav triangle 😉",
+    answer: "right angle triangle",
+    hint: "90° but make it 🌶️"
+  },
+  {
+    question: "What is the best date food? 🥘",
+    answer: "pav bhaji",
+    hint: "forbes top 10 date ideas in CP 😋🍞"
+  },
+  {
+    question: "What do you call a gift for Ritoja? 🎁",
+    answer: "ritofa",
+    hint: "Rhymes with sofa 👀"
+  },
+  {
+    question: "What do  you call a \"Queen of Pop Rap\" Ritoja 🎤?",
+    answer: "ridojacat",
+    hint: "mm, she the devil ( get it? 😏 )"
+  },
+  {
+    question: "What is my full tiome job title? 💼",
+    answer: "joru ka gulaam",
+    hint: "whats in a url? - shakepeare probably in tcs"
+  },
+  {
+    question: "Who is the world's funniest bf? 🥰",
+    answer: "auleen",
+    hint: "come on say it, ik you know it 😘"
+  },
+];
 
 const baseImg = "/pixel-heart-1.png";
 const sadImages = [
@@ -27,6 +63,7 @@ export default function KawaiiValentine() {
   const [noCount, setNoCount] = useState(0);
   const [heartIndex, setHeartIndex] = useState(0);
   const [cameFromQuiz, setCameFromQuiz] = useState(false);
+  const [showHint, setShowHint] = useState(false);
 
   const getNoMessage = (count: number) => {
     const cuteWarnings = [
@@ -62,6 +99,7 @@ export default function KawaiiValentine() {
     if (input.toLowerCase().trim() === QUESTIONS[currentQ].answer.toLowerCase()) {
       setError(false);
       setInput("");
+      setShowHint(false);
       if (currentQ + 1 < QUESTIONS.length) {
         setCurrentQ(currentQ + 1);
       } else {
@@ -107,6 +145,20 @@ export default function KawaiiValentine() {
                 className="w-full border-2 border-black rounded-none p-2 text-center"
                 placeholder="type here…"
               />
+              <div className="space-y-1">
+                {!showHint ? (
+                  <button
+                    onClick={() => setShowHint(true)}
+                    className="text-xs text-pink-600 underline hover:text-pink-700"
+                  >
+                    need a hint? 👀
+                  </button>
+                ) : (
+                  <p className="text-xs text-gray-600 italic">
+                    hint: {QUESTIONS[currentQ].hint}
+                  </p>
+                )}
+              </div>
               {error && <p className="text-xs text-red-500">try again 🥺</p>}
               <Button
                 className="bg-pink-500 hover:bg-pink-600 rounded-none border-2 border-black shadow-[3px_3px_0_#000]"
