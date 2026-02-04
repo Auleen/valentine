@@ -36,7 +36,7 @@ const QUESTIONS = [
   {
     question: "What is my full tiome job title? 💼",
     answer: "joru ka gulam",
-    hint: "whats in a url? - shakepeare probably in tcs"
+    hint: "whats in a url? - shakespeare, 2017, probably in tcs"
   },
   {
     question: "Who is the world's funniest bf? 🥰",
