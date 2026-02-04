@@ -35,7 +35,7 @@ const QUESTIONS = [
   },
   {
     question: "What is my full tiome job title? 💼",
-    answer: "joru ka gulaam",
+    answer: "joru ka gulam",
     hint: "whats in a url? - shakepeare probably in tcs"
   },
   {
@@ -45,7 +45,7 @@ const QUESTIONS = [
   },
 ];
 
-const baseImg = "/pixel-heart-1.png";
+const baseImg = "/val.png";
 const sadImages = [
   "/pixel-heart-sad-3.png",
   "/pixel-heart-sad-1.png",
